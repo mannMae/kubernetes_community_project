@@ -4,9 +4,16 @@ import { publicRoutes } from './public';
 import { Home } from 'features/misc';
 
 import { firebaseAuth } from 'libraries/firebase';
+import { useEffect, useState } from 'react';
 
 export const AppRoutes = () => {
-  const auth = firebaseAuth.currentUser ? true : false;
+  const [init, setInit] = useState(false);
+
+  useEffect(() => {
+    firebaseAuth.onAuthStateChanged((user) => {
+      setInit(true);
+    });
+  }, []);
 
   const commonRoutes = [
     {
@@ -19,8 +26,8 @@ export const AppRoutes = () => {
     },
   ];
 
-  const routes = auth ? protectedRoutes : publicRoutes;
+  const routes = firebaseAuth.currentUser ? protectedRoutes : publicRoutes;
 
   const element = useRoutes([...routes, ...commonRoutes]);
-  return <>{element}</>;
+  return <>{init && element}</>;
 };
