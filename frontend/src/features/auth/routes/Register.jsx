@@ -5,7 +5,7 @@ import { RegisterForm } from '../components/RegisterForm';
 export const Register = () => {
   const navigate = useNavigate();
   return (
-    <Layout title="로그인">
+    <Layout title="회원가입">
       <RegisterForm onSuccess={() => navigate('/')} />
     </Layout>
   );
