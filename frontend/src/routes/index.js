@@ -5,6 +5,7 @@ import { Home } from 'features/misc';
 
 import { firebaseAuth } from 'libraries/firebase';
 import { useEffect, useState } from 'react';
+import { MainLayout } from 'components/Layout';
 
 export const AppRoutes = () => {
   const [init, setInit] = useState(false);
@@ -29,5 +30,9 @@ export const AppRoutes = () => {
   const routes = firebaseAuth.currentUser ? protectedRoutes : publicRoutes;
 
   const element = useRoutes([...routes, ...commonRoutes]);
-  return <>{init && element}</>;
+  return (
+    <>
+      <MainLayout>{init && element}</MainLayout>
+    </>
+  );
 };
