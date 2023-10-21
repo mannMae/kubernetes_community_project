@@ -21,6 +21,30 @@ export const FormInner = styled.div`
   padding: 5px;
 `;
 
+export const PostImageWrapper = styled.div`
+  position: relative;
+`;
+
+export const PostImage = styled.img`
+  height: 200px;
+  width: 300px;
+
+  border-radius: 10px;
+
+  object-fit: cover;
+`;
+
+export const ClearImageButton = styled.button`
+  height: 20px;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+
+  border-radius: 50%;
+  color: ${(props) => props.theme.font.color.white};
+  background-color: rgba(0, 0, 0, 0.3);
+`;
+
 export const Buttons = styled.div`
   display: flex;
   justify-content: space-between;

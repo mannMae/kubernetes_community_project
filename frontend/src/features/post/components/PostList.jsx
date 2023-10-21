@@ -23,6 +23,7 @@ export const PostList = () => {
                 ? auth?.credential.user.uid === post.userId
                 : false
             }
+            imageUrl={post?.imageUrl && post?.imageUrl}
           />
         ))}
     </Wrapper>

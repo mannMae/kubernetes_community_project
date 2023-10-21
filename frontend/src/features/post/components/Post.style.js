@@ -33,6 +33,16 @@ export const ErrorMessage = styled.span`
   color: ${(props) => props.theme.warning};
 `;
 
+export const PostImage = styled.img`
+  align-self: center;
+  height: 200px;
+  width: 300px;
+
+  border-radius: 10px;
+
+  object-fit: cover;
+`;
+
 export const FormFooter = styled.div`
   display: flex;
   align-items: center;

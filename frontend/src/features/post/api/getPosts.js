@@ -7,7 +7,9 @@ export const getPosts = async (setPostList) => {
 
 export const getRealtimePosts = (setPostList) => {
   return onSnapshot(collection(firestore, 'posts'), (snapshot) => {
-    const posts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const posts = snapshot.docs
+      .map((doc) => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => b.createAt - a.createAt);
     setPostList(posts);
   });
 };

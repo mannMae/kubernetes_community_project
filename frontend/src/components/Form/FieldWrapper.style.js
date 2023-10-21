@@ -3,9 +3,12 @@ import styled from 'styled-components';
 export const Wrapper = styled.label`
   display: block;
   border-radius: 5px;
-  padding: 10px;
+  padding: ${(props) => (props.padding ? props.padding : '10px')};
 
-  background-color: ${(props) => props.theme.background.lightGray};
+  background-color: ${(props) =>
+    props.backgroundcolor
+      ? props.backgroundcolor
+      : props.theme.background.lightGray};
 `;
 
 export const Label = styled.label``;

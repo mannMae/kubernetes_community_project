@@ -1,22 +1,33 @@
-import { Form, TextareaField } from 'components/Form';
+import { Form, ImageInputField, TextareaField } from 'components/Form';
 import {
   Buttons,
+  ClearImageButton,
   ErrorMessage,
   FormInner,
   GrapicButtons,
+  PostImage,
+  PostImageWrapper,
   ProfileImage,
   Wrapper,
 } from './PostForm.style';
 import { Button } from 'components/Elements';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPost } from '../api/createPost';
 import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 export const PostForm = ({ onSuccess }) => {
   const [firebaseError, setFirebaseError] = useState('');
+  const [image, setImage] = useState();
 
   const auth = useSelector(({ auth }) => auth);
-  console.log(auth);
+
+  const { resetField, reset } = useForm();
+
+  useEffect(() => {
+    reset({ content: '' });
+  }, [image]);
+
   return (
     <Wrapper>
       <ProfileImage src={auth?.credential && auth.credential.user.photoURL} />
@@ -26,8 +37,11 @@ export const PostForm = ({ onSuccess }) => {
             await createPost({
               content: values.content,
               userId: auth.credential.user.uid,
+              image,
             });
+            reset();
             onSuccess();
+            setImage(null);
           } catch (error) {
             setFirebaseError(error.content);
           }
@@ -38,14 +52,27 @@ export const PostForm = ({ onSuccess }) => {
             <FormInner>
               <TextareaField
                 type="text"
+                defaultvalue=""
                 error={formState.errors['content']}
                 registration={register('content')}
               />
+              {image && (
+                <PostImageWrapper>
+                  <PostImage src={image} />
+                  <ClearImageButton onClick={() => setImage('')}>
+                    ✕
+                  </ClearImageButton>
+                </PostImageWrapper>
+              )}
               <ErrorMessage>{firebaseError}</ErrorMessage>
               <Buttons>
                 <GrapicButtons>
-                  <Button />
-                  <Button />
+                  <ImageInputField
+                    size={'16'}
+                    setImage={setImage}
+                    error={formState.errors['image']}
+                    registration={register('image')}
+                  />
                 </GrapicButtons>
                 <Button>작성하기</Button>
               </Buttons>

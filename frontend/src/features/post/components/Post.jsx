@@ -6,6 +6,7 @@ import {
   FormFooter,
   FormInner,
   Header,
+  PostImage,
   PostInfomation,
   Wrapper,
 } from './Post.style';
@@ -17,7 +18,7 @@ import { useState } from 'react';
 import { Form, TextareaField } from 'components/Form';
 import { updatePost } from '../api/updatePost';
 
-export const Post = ({ id, content, createdAt, isMine }) => {
+export const Post = ({ id, content, createdAt, isMine, imageUrl }) => {
   const [isEditable, setIsEditable] = useState(false);
   const [firebaseError, setFirebaseError] = useState('');
   return (
@@ -36,7 +37,7 @@ export const Post = ({ id, content, createdAt, isMine }) => {
               backgroundcolor="white"
               padding="0"
               endIcon={<ImBin />}
-              onClick={() => deletePost(id)}
+              onClick={() => deletePost({ postId: id, imageUrl })}
             />
           </Buttons>
         )}
@@ -65,6 +66,7 @@ export const Post = ({ id, content, createdAt, isMine }) => {
                   registration={register('content')}
                 />
                 <ErrorMessage>{firebaseError}</ErrorMessage>
+                {imageUrl && <PostImage src={imageUrl} />}
                 <FormFooter>
                   <AiOutlineHeart />
                   <Button>수정하기</Button>
@@ -74,7 +76,10 @@ export const Post = ({ id, content, createdAt, isMine }) => {
           }}
         </Form>
       ) : (
-        <Content>{content}</Content>
+        <>
+          <Content>{content}</Content>
+          {imageUrl && <PostImage src={imageUrl} />}
+        </>
       )}
     </Wrapper>
   );

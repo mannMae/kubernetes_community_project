@@ -1,8 +1,14 @@
 import { Error, Inner, Label, Wrapper } from './FieldWrapper.style';
 
-export const FieldWrapper = ({ label, error, children }) => {
+export const FieldWrapper = ({
+  label,
+  error,
+  children,
+  padding,
+  backgroundcolor,
+}) => {
   return (
-    <Wrapper>
+    <Wrapper padding={padding} backgroundcolor={backgroundcolor}>
       <Label>
         {label}
         <Inner>{children}</Inner>
