@@ -16,9 +16,13 @@ import {
 } from '../api/login';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { authSlice } from '../slice';
 
 export const LoginForm = ({ onSuccess }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [firebaseError, setFirebaseError] = useState('');
 
   return (
@@ -29,7 +33,12 @@ export const LoginForm = ({ onSuccess }) => {
             await loginWithEmailAndPassword({
               email: values.email,
               password: values.password,
-            });
+            })
+              .then((res) => {
+                dispatch(authSlice.actions.updateUser({ ...res }));
+              })
+              .catch((error) => console.error(error));
+
             onSuccess();
           } catch (error) {
             setFirebaseError(error.message);
@@ -62,14 +71,28 @@ export const LoginForm = ({ onSuccess }) => {
         backgroundcolor="white"
         fontcolor="black"
         endIcon={<ButtonLogo src={GoogleLogo} />}
-        onClick={() => loginWithGoogle().then(() => navigate('/'))}
+        onClick={() =>
+          loginWithGoogle()
+            .then((res) => {
+              dispatch(authSlice.actions.updateUser({ ...res }));
+            })
+            .then(() => navigate('/'))
+            .catch((error) => console.error(error))
+        }
       >
         구글 계정으로 로그인
       </Button>
       <Button
         backgroundcolor="#333"
         endIcon={<ButtonLogo src={GithubLogo} />}
-        onClick={() => loginWithGithub().then(() => navigate('/'))}
+        onClick={() =>
+          loginWithGithub()
+            .then((res) => {
+              dispatch(authSlice.actions.updateUser({ ...res }));
+            })
+            .then(() => navigate('/'))
+            .catch((error) => console.error(error))
+        }
       >
         깃허브 계정으로 로그인
       </Button>

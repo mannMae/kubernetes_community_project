@@ -13,7 +13,7 @@ export const Wrapper = styled.button`
   border-style: ${(props) => (props.bordercolor ? 'solid' : null)};
   border-radius: 5px;
 
-  padding: 10px;
+  padding: ${(props) => (props.padding ? props.padding : '10px')};
 
   background-color: ${(props) =>
     props.backgroundcolor ? props.backgroundcolor : props.theme.primary};

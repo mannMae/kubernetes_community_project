@@ -8,16 +8,18 @@ export const Button = ({
   bordercolor,
   backgroundcolor,
   fontcolor,
+  padding,
 }) => {
   return (
     <Wrapper
       onClick={onClick}
       bordercolor={bordercolor}
       backgroundcolor={backgroundcolor}
+      padding={padding}
     >
-      {startIcon}
-      <Content fontcolor={fontcolor}>{children}</Content>
-      {endIcon}
+      {startIcon && startIcon}
+      {children && <Content fontcolor={fontcolor}>{children}</Content>}
+      {endIcon && endIcon}
     </Wrapper>
   );
 };

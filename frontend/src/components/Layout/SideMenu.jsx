@@ -1,13 +1,20 @@
 import { Button } from 'components/Elements';
 import { Wrapper } from './SideMenu.style';
-import { logout } from 'features/auth';
+import { authSlice, logout } from 'features/auth';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export const SideMenu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleClickLogout = async () => {
-    await logout();
-    navigate('/');
+    await logout()
+      .then((res) => {
+        dispatch(authSlice.actions.updateUser());
+      })
+      .then((res) => navigate('/'))
+      .catch((error) => console.error(error));
   };
   return (
     <Wrapper>
