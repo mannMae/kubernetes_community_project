@@ -20,6 +20,8 @@ export const Wrapper = styled.button`
 `;
 
 export const Content = styled.span`
+  font-size: ${(props) => (props.fontsize ? props.fontsize : '12px')};
   color: ${(props) =>
     props.fontcolor ? props.fontcolor : props.theme.font.color.white};
+  font-weight: ${(props) => (props.fontweight ? props.fontweight : 400)};
 `;

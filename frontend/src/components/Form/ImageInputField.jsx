@@ -3,7 +3,13 @@ import { Input } from './ImageInputField.style';
 
 import { AiOutlinePicture } from 'react-icons/ai';
 
-export const ImageInputField = ({ registration, error, size, setImage }) => {
+export const ImageInputField = ({
+  registration,
+  error,
+  size,
+  setImage,
+  label,
+}) => {
   const handleChangeInput = (e) => {
     console.log(e.target.value);
     const fileReader = new FileReader();
@@ -15,7 +21,7 @@ export const ImageInputField = ({ registration, error, size, setImage }) => {
   };
   return (
     <FieldWrapper
-      label={<AiOutlinePicture size={size} />}
+      label={label ? label : <AiOutlinePicture size={size} />}
       backgroundcolor="transparent"
       error={error}
       padding="0"

@@ -10,7 +10,7 @@ export const protectedRoutes = [
         element: <>app</>,
       },
       {
-        path: '/app/user',
+        path: '/app/user/*',
         element: <UserRoutes />,
       },
       {

@@ -7,7 +7,9 @@ export const Button = ({
   endIcon,
   bordercolor,
   backgroundcolor,
+  fontsize,
   fontcolor,
+  fontweight,
   padding,
 }) => {
   return (
@@ -18,7 +20,15 @@ export const Button = ({
       padding={padding}
     >
       {startIcon && startIcon}
-      {children && <Content fontcolor={fontcolor}>{children}</Content>}
+      {children && (
+        <Content
+          fontsize={fontsize}
+          fontcolor={fontcolor}
+          fontweight={fontweight}
+        >
+          {children}
+        </Content>
+      )}
       {endIcon && endIcon}
     </Wrapper>
   );
