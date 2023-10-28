@@ -8,7 +8,7 @@ export const Wrapper = styled.label`
   background-color: ${(props) =>
     props.backgroundcolor
       ? props.backgroundcolor
-      : props.theme.background.lightGray};
+      : props.theme.background.color.lightGray};
 `;
 
 export const Label = styled.label``;

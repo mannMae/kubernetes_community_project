@@ -1,12 +1,23 @@
 import { Button } from 'components/Elements';
-import { ListItem, NavigationList, Wrapper } from './Navigation.style';
+import {
+  Email,
+  Footer,
+  Infomation,
+  ListItem,
+  NavigationList,
+  Nickname,
+  ProfileImage,
+  Wrapper,
+} from './Navigation.style';
 import { useNavigate } from 'react-router-dom';
 
 import { AiOutlineHome, AiFillHome } from 'react-icons/ai';
 import { FaRegUser, FaUser } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 export const Navigation = () => {
   const navigate = useNavigate();
+  const auth = useSelector(({ auth }) => auth);
 
   return (
     <Wrapper>
@@ -29,6 +40,15 @@ export const Navigation = () => {
           );
         })}
       </NavigationList>
+      {auth?.credential && (
+        <Footer>
+          <ProfileImage />
+          <Infomation>
+            <Nickname>{auth?.credential.user.nickname}</Nickname>
+            <Email>{auth?.credential.user.email}</Email>
+          </Infomation>
+        </Footer>
+      )}
     </Wrapper>
   );
 };

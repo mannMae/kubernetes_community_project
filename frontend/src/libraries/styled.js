@@ -21,7 +21,6 @@ body{
     line-height: 1;
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #fff;
-    margin-bottom: 100px;
 }
 ol, ul{
     list-style: none;
@@ -30,14 +29,22 @@ button {
     border: 0;
     background: transparent;
     cursor: pointer;
-}`;
+}
+img {
+  display: inline-block;
+  content: '';
+  border: 0;
+}
+`;
 
 export const theme = {
   primary: '#3371e3',
   warning: '#ff0000',
   background: {
-    lightGray: '#efefef',
-    white: '#fff',
+    color: {
+      lightGray: '#efefef',
+      white: '#fff',
+    },
   },
   font: {
     color: {
