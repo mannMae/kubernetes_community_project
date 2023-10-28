@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: 100%;
+  width: 40vw;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+
+  margin: 0 auto;
 `;
 
 export const Logo = styled.img`
@@ -17,4 +20,6 @@ export const Title = styled.h2`
   font-weight: 700;
 `;
 
-export const Inner = styled.div``;
+export const Inner = styled.div`
+  width: 100%;
+`;

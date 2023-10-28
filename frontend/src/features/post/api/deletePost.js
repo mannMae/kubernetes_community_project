@@ -5,6 +5,8 @@ import { firebaseStorage, firestore } from 'libraries/firebase';
 export const deletePost = async ({ postId, imageUrl }) => {
   await deleteDoc(doc(firestore, 'posts', postId));
   if (imageUrl) {
-    await deleteObject(ref(firebaseStorage, imageUrl));
+    await deleteObject(ref(firebaseStorage, imageUrl))
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));
   }
 };

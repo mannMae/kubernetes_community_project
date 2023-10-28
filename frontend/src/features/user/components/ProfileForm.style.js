@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  border: ${(props) => `1px solid ${props.theme.border.color.lightGray}`};
+`;
 
 export const FormInner = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
 
-  padding: 5px;
+  padding: 20px 10px;
 `;
 
 export const ProfileImage = styled.img`
@@ -18,8 +20,6 @@ export const ProfileImage = styled.img`
 `;
 
 export const Contents = styled.div`
-  width: 150px;
-
   display: flex;
   flex-direction: column;
   gap: 15px;

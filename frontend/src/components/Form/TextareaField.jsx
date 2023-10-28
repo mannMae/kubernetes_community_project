@@ -8,6 +8,7 @@ export const TextareaField = ({
   registration,
   error,
   defaultvalue,
+  width,
 }) => {
   const textarea = useRef();
 
@@ -30,6 +31,7 @@ export const TextareaField = ({
         onChange={onChange}
         rows={1}
         ref={handleref}
+        width={width}
       />
     </FieldWrapper>
   );

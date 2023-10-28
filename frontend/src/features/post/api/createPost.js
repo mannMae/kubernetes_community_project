@@ -5,7 +5,7 @@ import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 export const createPost = async ({ content, userId, image }) => {
   if (image) {
     const imageUpload = await uploadString(
-      ref(firebaseStorage, userId),
+      ref(firebaseStorage, `posts/${userId}`),
       image,
       'data_url'
     );
@@ -17,10 +17,11 @@ export const createPost = async ({ content, userId, image }) => {
       createAt: Date.now(),
     });
   } else {
-    await addDoc(collection(firestore, 'posts'), {
+    const post = await addDoc(collection(firestore, 'posts'), {
       content,
       userId,
       createAt: Date.now(),
-    });
+    }).then((res) => console.log(res));
+    console.log(post);
   }
 };

@@ -1,5 +1,3 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.section`
-  width: 55%;
-`;
+export const Wrapper = styled.div``;

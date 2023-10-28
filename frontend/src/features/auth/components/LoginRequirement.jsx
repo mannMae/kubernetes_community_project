@@ -1,10 +1,12 @@
 import { Button } from 'components/Elements';
-import { Describe, Wrapper } from './LoginRequirement.style';
+import { Describtion, Wrapper } from './LoginRequirement.style';
 
-export const LoginRequirement = () => {
+export const LoginRequirement = ({ describtion }) => {
   return (
     <Wrapper>
-      <Describe>로그인이 필요합니다</Describe>
+      <Describtion>
+        {describtion ? describtion : '로그인이 필요합니다'}
+      </Describtion>
       <Button>로그인하기</Button>
     </Wrapper>
   );

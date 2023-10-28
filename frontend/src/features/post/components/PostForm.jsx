@@ -31,66 +31,66 @@ export const PostForm = ({ onSuccess }) => {
     reset({ content: '' });
   }, [image]);
 
+  if (!auth?.credential) {
+    return (
+      <LoginRequirement describtion="게시글을 작성하려면 로그인이 필요합니다" />
+    );
+  }
   return (
     <Wrapper>
-      {auth?.credential ? (
-        <>
-          <ProfileImage
-            src={auth?.credential ? auth.credential.user.photoURL : null}
-          />
-          <Form
-            onSubmit={async (values) => {
-              try {
-                await createPost({
-                  content: values.content,
-                  userId: auth.credential.user.uid,
-                  image,
-                });
-                reset();
-                onSuccess();
-                setImage(null);
-              } catch (error) {
-                setFirebaseError(error.content);
-              }
-            }}
-          >
-            {({ register, formState }) => {
-              return (
-                <FormInner>
-                  <TextareaField
-                    type="text"
-                    defaultvalue=""
-                    error={formState.errors['content']}
-                    registration={register('content')}
+      <ProfileImage
+        src={auth?.credential ? auth.credential.user.photoURL : null}
+      />
+      <Form
+        onSubmit={async (values) => {
+          try {
+            await createPost({
+              content: values.content,
+              userId: auth.credential.user.uid,
+              image,
+            });
+            reset();
+            onSuccess();
+            setImage(null);
+          } catch (error) {
+            setFirebaseError(error.content);
+          }
+        }}
+      >
+        {({ register, formState }) => {
+          return (
+            <FormInner>
+              <TextareaField
+                width="100%"
+                type="text"
+                defaultvalue=""
+                error={formState.errors['content']}
+                registration={register('content')}
+              />
+              {image && (
+                <PostImageWrapper>
+                  <PostImage src={image} />
+                  <ClearImageButton onClick={() => setImage('')}>
+                    ✕
+                  </ClearImageButton>
+                </PostImageWrapper>
+              )}
+              <ErrorMessage>{firebaseError}</ErrorMessage>
+              <Buttons>
+                <GrapicButtons>
+                  <ImageInputField
+                    size={'16'}
+                    setImage={setImage}
+                    error={formState.errors['image']}
+                    registration={register('image')}
                   />
-                  {image && (
-                    <PostImageWrapper>
-                      <PostImage src={image} />
-                      <ClearImageButton onClick={() => setImage('')}>
-                        ✕
-                      </ClearImageButton>
-                    </PostImageWrapper>
-                  )}
-                  <ErrorMessage>{firebaseError}</ErrorMessage>
-                  <Buttons>
-                    <GrapicButtons>
-                      <ImageInputField
-                        size={'16'}
-                        setImage={setImage}
-                        error={formState.errors['image']}
-                        registration={register('image')}
-                      />
-                    </GrapicButtons>
-                    <Button>작성하기</Button>
-                  </Buttons>
-                </FormInner>
-              );
-            }}
-          </Form>
-        </>
-      ) : (
-        <LoginRequirement />
-      )}
+                </GrapicButtons>
+                <Button>작성하기</Button>
+              </Buttons>
+            </FormInner>
+          );
+        }}
+      </Form>
     </Wrapper>
   );
 };

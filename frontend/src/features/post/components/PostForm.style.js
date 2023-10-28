@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   gap: 10px;
+  border: ${(props) => `1px solid ${props.theme.border.color.lightGray}`};
   padding: 20px;
 `;
 
@@ -11,11 +12,11 @@ export const ProfileImage = styled.img`
   height: 50px;
   border-radius: 50%;
   background-color: ${(props) => props.theme.background.color.lightGray};
-
-  object-fit: cover;
 `;
 
 export const FormInner = styled.div`
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -24,6 +25,7 @@ export const FormInner = styled.div`
 `;
 
 export const PostImageWrapper = styled.div`
+  width: 300px;
   position: relative;
 `;
 

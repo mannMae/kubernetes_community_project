@@ -8,8 +8,11 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+
+  padding: 20px;
+  background-color: ${(props) => props.theme.background.color.lightGray};
 `;
 
-export const Describe = styled.p`
+export const Describtion = styled.p`
   font-size: 18px;
 `;

@@ -7,10 +7,18 @@ export const InputField = ({
   registration,
   error,
   placeholder,
+  width,
+  defaultvalue,
 }) => {
   return (
     <FieldWrapper label={label} error={error}>
-      <Input type={type} {...registration} placeholder={placeholder} />
+      <Input
+        type={type}
+        {...registration}
+        placeholder={placeholder}
+        width={width}
+        defaultValue={defaultvalue}
+      />
     </FieldWrapper>
   );
 };
