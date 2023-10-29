@@ -9,8 +9,9 @@ export const Wrapper = styled.div`
   align-items: center;
   gap: 30px;
 
+  border-bottom: ${(props) =>
+    `1px solid ${props.theme.border.color.lightGray}`};
   padding: 20px;
-  background-color: ${(props) => props.theme.background.color.lightGray};
 `;
 
 export const Describtion = styled.p`

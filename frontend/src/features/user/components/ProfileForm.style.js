@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  border: ${(props) => `1px solid ${props.theme.border.color.lightGray}`};
+  border-bottom: ${(props) =>
+    `1px solid ${props.theme.border.color.lightGray}`};
 `;
 
 export const FormInner = styled.div`

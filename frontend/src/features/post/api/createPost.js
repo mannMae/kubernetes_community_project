@@ -1,27 +1,39 @@
 import { firebaseStorage, firestore } from 'libraries/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 
-export const createPost = async ({ content, userId, image }) => {
+export const createPost = async ({ content, image, user }) => {
   if (image) {
-    const imageUpload = await uploadString(
-      ref(firebaseStorage, `posts/${userId}`),
-      image,
-      'data_url'
-    );
-    const imageUrl = await getDownloadURL(imageUpload.ref);
     await addDoc(collection(firestore, 'posts'), {
-      imageUrl,
       content,
-      userId,
+      user,
       createAt: Date.now(),
+    }).then(async (res) => {
+      const imageUpload = await uploadString(
+        ref(firebaseStorage, `posts/${user.id}/${res.id}`),
+        image,
+        'data_url'
+      );
+      const imageUrl = await getDownloadURL(imageUpload.ref);
+      await updateDoc(doc(firestore, 'posts', res.id), { imageUrl });
+
+      const userDoc = await getDoc(doc(firestore, `users/${user.id}`));
+      const postlist = userDoc.get('postlist');
+      await updateDoc(doc(firestore, 'users', user.id), {
+        postlist: [...postlist, res.id],
+      });
     });
   } else {
-    const post = await addDoc(collection(firestore, 'posts'), {
+    await addDoc(collection(firestore, 'posts'), {
       content,
-      userId,
+      user,
       createAt: Date.now(),
-    }).then((res) => console.log(res));
-    console.log(post);
+    }).then(async (res) => {
+      const userDoc = await getDoc(doc(firestore, `users/${user.id}`));
+      const postlist = userDoc.get('postlist');
+      await updateDoc(doc(firestore, 'users', user.id), {
+        postlist: [...postlist, res.id],
+      });
+    });
   }
 };

@@ -5,22 +5,25 @@ import { Post } from './Post';
 import { useSelector } from 'react-redux';
 
 export const PostList = () => {
-  const [postList, setPostList] = useState([]);
+  const [postlist, setPostList] = useState([]);
   const auth = useSelector(({ auth }) => auth);
 
   useEffect(() => {
     getRealtimePosts(setPostList);
   }, []);
+
+  console.log(postlist);
+
   return (
     <Wrapper>
-      {postList &&
-        postList.map((post, i) => (
+      {postlist &&
+        postlist.map((post, i) => (
           <Post
             key={i}
             {...post}
             isMine={
               auth?.credential
-                ? auth?.credential.user.uid === post.userId
+                ? auth?.credential.user.uid === post?.user?.id
                 : false
             }
             imageUrl={post?.imageUrl && post?.imageUrl}

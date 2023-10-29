@@ -7,6 +7,7 @@ export const Wrapper = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-right: ${(props) => `1px solid ${props.theme.border.color.lightGray}`};
 `;
 
 export const NavigationInner = styled.div``;
@@ -32,8 +33,8 @@ export const Footer = styled.footer`
   align-items: center;
   gap: 10px;
 
+  border-top: ${(props) => `1px solid ${props.theme.border.color.lightGray}`};
   padding: 10px;
-  background-color: ${(props) => props.theme.background.color.lightGray};
 `;
 
 export const ProfileImage = styled.img`

@@ -23,13 +23,7 @@ export const PostForm = ({ onSuccess }) => {
 
   const auth = useSelector(({ auth }) => auth);
 
-  const { resetField, reset } = useForm();
-
-  console.log(auth.credential);
-
-  useEffect(() => {
-    reset({ content: '' });
-  }, [image]);
+  useEffect(() => {}, [image]);
 
   if (!auth?.credential) {
     return (
@@ -46,10 +40,14 @@ export const PostForm = ({ onSuccess }) => {
           try {
             await createPost({
               content: values.content,
-              userId: auth.credential.user.uid,
+              user: {
+                id: auth.credential.user.uid,
+                displayName: auth.credential.user.displayName,
+                photoURL: auth.credential.user.photoURL,
+                email: auth.credential.user.email,
+              },
               image,
             });
-            reset();
             onSuccess();
             setImage(null);
           } catch (error) {

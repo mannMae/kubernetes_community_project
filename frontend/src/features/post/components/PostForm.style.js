@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   gap: 10px;
-  border: ${(props) => `1px solid ${props.theme.border.color.lightGray}`};
+  border-bottom: ${(props) =>
+    `1px solid ${props.theme.border.color.lightGray}`};
   padding: 20px;
 `;
 
