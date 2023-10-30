@@ -16,6 +16,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import { AiOutlineHome, AiFillHome } from 'react-icons/ai';
+import { BiSearch, BiSolidSearch } from 'react-icons/bi';
 import { FaRegUser, FaUser } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
@@ -93,6 +94,12 @@ const memberNavigationList = [
     startIcons: [<FaRegUser />, <FaUser />],
     path: '/app/user/profile',
   },
+  {
+    value: 'search',
+    content: '검색',
+    startIcons: [<BiSearch />, <BiSolidSearch />],
+    path: '/search',
+  },
 ];
 
 const guestNavigationList = [
@@ -101,5 +108,11 @@ const guestNavigationList = [
     content: '홈',
     startIcons: [<AiOutlineHome />, <AiFillHome />],
     path: '/',
+  },
+  {
+    value: 'search',
+    content: '검색',
+    startIcons: [<BiSearch />, <BiSolidSearch />],
+    path: '/search',
   },
 ];

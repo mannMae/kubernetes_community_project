@@ -9,6 +9,7 @@ export const InputField = ({
   placeholder,
   width,
   defaultvalue,
+  onchange,
 }) => {
   return (
     <FieldWrapper label={label} error={error}>
@@ -18,6 +19,7 @@ export const InputField = ({
         placeholder={placeholder}
         width={width}
         defaultValue={defaultvalue}
+        onChange={onchange}
       />
     </FieldWrapper>
   );

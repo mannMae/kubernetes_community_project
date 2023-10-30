@@ -11,7 +11,10 @@ export const Wrapper = styled.label`
       : props.theme.background.color.lightGray};
 `;
 
-export const Label = styled.label``;
+export const Label = styled.label`
+  display: flex;
+  align-items: center;
+`;
 
 export const Inner = styled.div``;
 

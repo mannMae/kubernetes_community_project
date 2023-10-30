@@ -7,6 +7,8 @@ import { firebaseAuth } from 'libraries/firebase';
 import { useEffect, useState } from 'react';
 import { MainLayout } from 'components/Layout';
 import { useSelector } from 'react-redux';
+import { SearchRoutes } from 'features/search';
+import { SearchForm } from 'features/search';
 
 export const AppRoutes = () => {
   const [init, setInit] = useState(false);
@@ -24,6 +26,10 @@ export const AppRoutes = () => {
       element: <Home />,
     },
     {
+      path: '/search',
+      element: <SearchRoutes />,
+    },
+    {
       path: '*',
       element: <Navigate to="." />,
     },
@@ -38,7 +44,10 @@ export const AppRoutes = () => {
   }
   return (
     <>
-      <MainLayout>{init && element}</MainLayout>
+      <MainLayout>
+        <SearchForm />
+        {init && element}
+      </MainLayout>
     </>
   );
 };

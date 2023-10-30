@@ -1,7 +1,12 @@
-import { PostForm, PostList } from 'features/post';
-import { Wrapper } from './Home.style';
+import { PostForm, PostList, getRealtimePosts } from 'features/post';
+import { useEffect, useState } from 'react';
 
 export const Home = () => {
+  const [postlist, setPostList] = useState([]);
+
+  useEffect(() => {
+    getRealtimePosts(setPostList);
+  }, []);
   return (
     <>
       <PostForm
@@ -9,7 +14,7 @@ export const Home = () => {
           console.log('success');
         }}
       />
-      <PostList />
+      <PostList postlist={postlist} />
     </>
   );
 };

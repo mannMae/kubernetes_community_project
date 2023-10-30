@@ -17,7 +17,7 @@ export const SideMenu = () => {
       .then((res) => navigate('/'))
       .catch((error) => console.error(error));
   };
-  console.log(auth);
+
   if (auth?.credential) {
     return (
       <Wrapper>
