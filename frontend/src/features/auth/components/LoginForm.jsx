@@ -96,7 +96,9 @@ export const LoginForm = ({ onSuccess }) => {
       >
         깃허브 계정으로 로그인
       </Button>
-      <Button onClick={() => navigate('../register')}>쿠버즈 회원가입</Button>
+      <Button onClick={() => navigate('../register')}>
+        하이클레프 회원가입
+      </Button>
     </Wrapper>
   );
 };

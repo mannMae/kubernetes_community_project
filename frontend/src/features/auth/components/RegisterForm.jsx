@@ -45,7 +45,7 @@ export const RegisterForm = ({ onSuccess }) => {
           );
         }}
       </Form>
-      <Button onClick={() => navigate('../login')}>쿠버즈 로그인</Button>
+      <Button onClick={() => navigate('../login')}>하이클레프 로그인</Button>
     </Wrapper>
   );
 };

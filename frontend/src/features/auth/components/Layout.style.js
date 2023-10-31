@@ -12,7 +12,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 100px;
+  width: 250px;
+
+  cursor: pointer;
 `;
 
 export const Title = styled.h2`

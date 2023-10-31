@@ -13,11 +13,11 @@ export const Wrapper = styled.nav`
 export const NavigationInner = styled.div``;
 
 export const Header = styled.header`
-  padding: 10px;
+  padding: 10px 5px;
 `;
 
 export const Logo = styled.img`
-  width: 40px;
+  width: 140px;
 
   cursor: pointer;
 `;
@@ -27,14 +27,24 @@ export const NavigationList = styled.ul``;
 export const ListItem = styled.li``;
 export const Footer = styled.footer`
   width: 100%;
-  height: 100px;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 
   border-top: ${(props) => `1px solid ${props.theme.border.color.lightGray}`};
   padding: 10px;
+`;
+
+export const Profile = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 `;
 
 export const ProfileImage = styled.img`

@@ -7,15 +7,18 @@ export const Search = () => {
 
   const queryString = window.location.search;
   const searchWord = queryString.split('=')[1];
+  const decodedSearchWord = decodeURI(searchWord);
 
   useEffect(() => {
     getRealtimePosts(setPostList);
   }, []);
 
   useEffect(() => {
-    setFilteredPostlist(postlist.filter((p) => p.content.includes(searchWord)));
+    setFilteredPostlist(
+      postlist.filter((p) => p.content.includes(decodedSearchWord))
+    );
   }, [postlist, searchWord]);
-  console.log(postlist, filteredPostlist);
+
   return (
     <>
       <PostList postlist={filteredPostlist} />

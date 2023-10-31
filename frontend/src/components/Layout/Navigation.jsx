@@ -10,6 +10,7 @@ import {
   NavigationInner,
   NavigationList,
   Nickname,
+  Profile,
   ProfileImage,
   Wrapper,
 } from './Navigation.style';
@@ -18,10 +19,11 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineHome, AiFillHome } from 'react-icons/ai';
 import { BiSearch, BiSolidSearch } from 'react-icons/bi';
 import { FaRegUser, FaUser } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import k8s_logo from 'assets/images/k8s_logo.png';
+import highclef_logo from 'assets/images/highclef_logo.png';
 import { useEffect, useState } from 'react';
+import { authSlice, logout } from 'features/auth';
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -36,11 +38,21 @@ export const Navigation = () => {
     }
   }, [auth?.credential]);
 
+  const dispatch = useDispatch();
+  const handleClickLogout = async () => {
+    await logout()
+      .then((res) => {
+        dispatch(authSlice.actions.updateUser());
+      })
+      .then((res) => navigate('/'))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <Wrapper>
       <NavigationInner>
         <Header>
-          <Logo src={k8s_logo} onClick={() => navigate('/')} />
+          <Logo src={highclef_logo} onClick={() => navigate('/')} />
         </Header>
         <NavigationList>
           {navigationList.map((item, index) => {
@@ -67,14 +79,20 @@ export const Navigation = () => {
       <Footer>
         {auth?.credential ? (
           <>
-            <ProfileImage src={auth.credential.user.photoURL} />
-            <Infomation>
-              <Nickname>{auth?.credential.user.displayName}</Nickname>
-              <Email>{auth?.credential.user.email}</Email>
-            </Infomation>
+            <Profile>
+              <ProfileImage src={auth.credential.user.photoURL} />
+              <Infomation>
+                <Nickname>{auth?.credential.user.displayName}</Nickname>
+                <Email>{auth?.credential.user.email}</Email>
+              </Infomation>
+            </Profile>
+            <Button onClick={() => handleClickLogout()}>로그아웃</Button>
           </>
         ) : (
-          <Message>로그인 정보가 없습니다</Message>
+          <>
+            <Message>로그인 정보가 없습니다</Message>
+            <Button onClick={() => navigate('/auth/login')}>로그인하기</Button>
+          </>
         )}
       </Footer>
     </Wrapper>
